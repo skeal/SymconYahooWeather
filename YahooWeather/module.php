@@ -1,4 +1,4 @@
-<?php
+<?
 
 class SymconYahooWeather extends IPSModule
 {
