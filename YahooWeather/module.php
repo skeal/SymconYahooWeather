@@ -13,6 +13,7 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterPropertyString("YWHTown", "London");
 		$this->RegisterPropertyInteger("YWHDays", 2);
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
+		$this->RegisterPropertyString("YWHTemperature","c");
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
 		
@@ -46,6 +47,16 @@ class SymconYahooWeather extends IPSModule
 		$this->SetValueInt("Tendenz", $pegelTendenzAktuell);
          * 
          */
+		$BASE_URL = "http://query.yahooapis.com/v1/public/yql"; 
+		$yql_query = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' .$this->ReadPropertyString("YWHTown") .'") and u="' .$this->ReadPropertyString("YWHTemperature") .'"'; 
+		$yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json"; 
+
+		$jsonDataFromURL = @file_get_contents($yql_query_url);
+		$jsonData = json_decode($jsonDataFromURL);
+
+		if( $jsonData->query->count > 0 )
+			$this->SetValueString("Wetter", print_r($jsonData) );
+
 		 
 		$this->SetValueString("Wetter", "test" .time() );
     }

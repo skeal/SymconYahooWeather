@@ -6,6 +6,12 @@
     { "type": "Label", "label": "----------------------------------------------------------------------------------------------------------------------------" },
     { "type": "ValidationTextBox", "name": "YWHTown", "caption": "Name der Stadt" },
     { "type": "IntervalBox", "name": "YWHIntervall", "caption": "Millisekunden" },
+	{ "type": "Select", "name": "YWHTemperature", "caption": "Temperaturanzeige",
+		"options": [
+			{ "label": "Celsius", "value":"c" },
+			{ "label": "Fahrenheit", "value":"f" }
+		]
+	},
 	{ "type": "Select", "name": "YWHDays", "caption": "Anzeige Tage",
 		"options": [
 			{ "label": "1 Tag anzeigen (min)", "value":"1" },
