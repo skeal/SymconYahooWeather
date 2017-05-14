@@ -4,7 +4,7 @@
 
     { "type": "Label", "label": "##### Yahoo!Weather v1.1  #####" },
     { "type": "Label", "label": "----------------------------------------------------------------------------------------------------------------------------" },
-    { "type": "HorizontalSlider", "name": "w_days", "minimum": 1, "maximum": 5, "onChange": "echo $id;" },
+    { "type": "HorizontalSlider", "name": "w_days", "minimum": 1, "maximum": 5 },
     { "type": "ValidationTextBox", "name": "w_town", "caption": "Name der Stadt" },
     { "type": "IntervalBox", "name": "w_updatetimer", "caption": "Millisekunden" }
   ], 
