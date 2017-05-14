@@ -27,7 +27,7 @@ class SymconYahooWeather extends IPSModule
         parent::ApplyChanges();
         
         $this->Update();
-        $this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("w_updatetimer"));
+        //$this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("w_updatetimer"));
     }
     public function Update()
     {
