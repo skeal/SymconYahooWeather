@@ -14,8 +14,9 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterPropertyInteger("YWHDays", 2);
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
 		
+		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
 		
-        //$this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
+        $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
     }
     public function Destroy()
     {
@@ -28,7 +29,7 @@ class SymconYahooWeather extends IPSModule
         parent::ApplyChanges();
         
         $this->Update();
-        //$this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("w_updatetimer"));
+        $this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("w_updatetimer"));
     }
     public function Update()
     {
@@ -45,6 +46,8 @@ class SymconYahooWeather extends IPSModule
 		$this->SetValueInt("Tendenz", $pegelTendenzAktuell);
          * 
          */
+		 
+		$this->SetValueString("Wetter", "test" .time() );
     }
 
     private function SetValueInt($Ident, $Value){
@@ -62,13 +65,9 @@ class SymconYahooWeather extends IPSModule
    
     private function SetValueString($Ident, $Value)
     {
-    		$id = $this->GetIDforIdent($Ident);
-    		if (GetValueString($id) <> $Value)
-    		{
-    				SetValueString($id, $Value);
-    				return true;
-    		}
-    		return false;
+    	$id = $this->GetIDforIdent($Ident);
+    	SetValueString($id, $Value);
+    	return true;
   	}
 		
 	
