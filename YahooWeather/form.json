@@ -1,9 +1,6 @@
 {
   "elements":
   [
-
-    { "type": "Label", "label": "##### Yahoo!Weather v1.1  #####" },
-    { "type": "Label", "label": "----------------------------------------------------------------------------------------------------------------------------" },
     { "type": "ValidationTextBox", "name": "YWHTown", "caption": "Name der Stadt" },
     { "type": "IntervalBox", "name": "YWHIntervall", "caption": "Millisekunden" },
 	{ "type": "Select", "name": "YWHTemperature", "caption": "Temperaturanzeige",

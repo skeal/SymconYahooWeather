@@ -34,31 +34,9 @@ class SymconYahooWeather extends IPSModule
     }
     public function Update()
     {
- 	/*	
-        $pegelUrl = "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/" .$this->ReadPropertyString("PEGELSTATION") ."/W/currentmeasurement.json";
+		$weatherDataJSON = $this->QueryWeatherData();
+		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON) );
 		
-		$pegelDataJSON = @file_get_contents($pegelUrl);
-		$pegelData = json_decode($pegelDataJSON);
-		
-		$pegelStandAktuell = $pegelData->value;
-		$this->SetValueFloat("Pegelaktuell", $pegelStandAktuell);
-		
-		$pegelTendenzAktuell = $pegelData->trend;
-		$this->SetValueInt("Tendenz", $pegelTendenzAktuell);
-         * 
-         */
-		$BASE_URL = "http://query.yahooapis.com/v1/public/yql"; 
-		$yql_query = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' .$this->ReadPropertyString("YWHTown") .'") and u="' .$this->ReadPropertyString("YWHTemperature") .'"'; 
-		$yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json"; 
-
-		$jsonDataFromURL = @file_get_contents($yql_query_url);
-		$jsonData = json_decode($jsonDataFromURL);
-
-		if( $jsonData->query->count > 0 )
-			$this->SetValueString("Wetter", $jsonData );
-
-		 
-		$this->SetValueString("Wetter", "test" .time() );
     }
 
     private function SetValueInt($Ident, $Value){
@@ -80,7 +58,22 @@ class SymconYahooWeather extends IPSModule
     	SetValueString($id, $Value);
     	return true;
   	}
-		
 	
+	private function GenerateWeatherTable($Value){
+    	
+    	if( $Value->query->count > 0 ){
+			return "Weather is fine.";
+		} 
+		else return "Weather is not available";
+  	}
+		
+	private function QueryWeatherData(){
+    	$BASE_URL = "http://query.yahooapis.com/v1/public/yql"; 
+		$yql_query = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' .$this->ReadPropertyString("YWHTown") .'") and u="' .$this->ReadPropertyString("YWHTemperature") .'"'; 
+		$yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json"; 
+
+		$jsonDataFromURL = @file_get_contents($yql_query_url);
+		return json_decode($jsonDataFromURL);
+  	}
 }
 ?>
