@@ -55,7 +55,7 @@ class SymconYahooWeather extends IPSModule
 		$jsonData = json_decode($jsonDataFromURL);
 
 		if( $jsonData->query->count > 0 )
-			$this->SetValueString("Wetter", print_r($jsonData) );
+			$this->SetValueString("Wetter", $jsonData );
 
 		 
 		$this->SetValueString("Wetter", "test" .time() );
