@@ -9,9 +9,11 @@ class SymconYahooWeather extends IPSModule
         //These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
 	
-        $this->RegisterPropertyString("w_town", "London");
-		$this->RegisterPropertyInteger("w_days", 2);
-        $this->RegisterPropertyInteger("w_updatetimer", 14400);
+        
+		$this->RegisterPropertyString("YWHTown", "London");
+		//$this->RegisterPropertyInteger("w_days", 2);
+        $this->RegisterPropertyInteger("YWHIntervall", 14400);
+		
 		
         //$this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
     }
