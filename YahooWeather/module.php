@@ -14,7 +14,7 @@ class SymconYahooWeather extends IPSModule
 	$this->RegisterPropertyInteger("w_days", 2);
         $this->RegisterPropertyInteger("w_updatetimer", 14400);
 		
-        $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
+        //$this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
     }
     public function Destroy()
     {
