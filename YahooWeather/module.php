@@ -66,7 +66,7 @@ class SymconYahooWeather extends IPSModule
     	
     	if( $Value->query->count > 0 ){
 			// build table
-			$weatherstring .= '<table width="100%">';
+			$weatherstring = '<table width="100%">';
 			// build header
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
