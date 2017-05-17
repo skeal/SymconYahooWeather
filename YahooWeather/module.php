@@ -68,6 +68,8 @@ class SymconYahooWeather extends IPSModule
 		
 		
     	if( $Value->query->count > 0 ){
+			$date=new DateTime('now'); 
+			 
 			// build table
 			$weatherstring = '<table width="100%">';
 			// build header
@@ -81,8 +83,7 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '</tr>';
 			
 			// row with weather infos	
-			$date=new DateTime('now'); 
-			 
+
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
