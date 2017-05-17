@@ -64,7 +64,7 @@ class SymconYahooWeather extends IPSModule
 	
 	private function GenerateWeatherTable($Value){
     	$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
-		$temperature = strtoupper($this->ReadPropertyInteger("YWHTemperature"));
+		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
 		
     	if( $Value->query->count > 0 ){
