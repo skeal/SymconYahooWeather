@@ -151,7 +151,7 @@ class SymconYahooWeather extends IPSModule
 				$weatherstring .= '<td align="center">';
 				$weatherstring .= 'min ' .$forecast[$i]->low .' &deg;' .$temperature;
 				$weatherstring .= '<br>';
-				$weatherstring .= 'max' .$forecast[$i]->high .' &deg;' .$temperature;
+				$weatherstring .= 'max ' .$forecast[$i]->high .' &deg;' .$temperature;
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
