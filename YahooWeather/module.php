@@ -63,7 +63,10 @@ class SymconYahooWeather extends IPSModule
   	}
 	
 	private function GenerateWeatherTable($Value){
-    	
+    	$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
+		$temperature = strtoupper($this->ReadPropertyInteger("YWHTemperature"));
+		
+		
     	if( $Value->query->count > 0 ){
 			// build table
 			$weatherstring = '<table width="100%">';
@@ -75,6 +78,33 @@ class SymconYahooWeather extends IPSModule
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
+			
+			// row with weather infos			
+			$weatherstring .= '<tr>';
+			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+				$weatherstring .= '<td align="center">';
+				//@todo: image with weather code
+				$weatherstring .= $forecast[$i]->code;
+				$weatherstring .= '<br>';
+				//@todo: replace weather code with beautiful text
+				$weatherstring .= $forecast[$i]->code;
+				$weatherstring .= '</td>';
+			}
+			$weatherstring .= '</tr>';
+			
+			// row with weather temperature			
+			$weatherstring .= '<tr>';
+			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+				$weatherstring .= '<td align="center">';
+				//@todo: image with weather code
+				$weatherstring .= $forecast[$i]->low .' &deg;' .$temperature;
+				$weatherstring .= '<br>';
+				//@todo: replace weather code with beautiful text
+				$weatherstring .= $forecast[$i]->high .' &deg;' .$temperature;
+				$weatherstring .= '</td>';
+			}
+			$weatherstring .= '</tr>';
+			
 			
 			
 			// finish table
