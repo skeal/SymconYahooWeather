@@ -149,9 +149,9 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
-				$weatherstring .= $forecast[$i]->low .' &deg;' .$temperature;
+				$weatherstring .= 'min ' .$forecast[$i]->low .' &deg;' .$temperature;
 				$weatherstring .= '<br>';
-				$weatherstring .= $forecast[$i]->high .' &deg;' .$temperature;
+				$weatherstring .= 'max' .$forecast[$i]->high .' &deg;' .$temperature;
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
