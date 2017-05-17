@@ -79,12 +79,17 @@ class SymconYahooWeather extends IPSModule
 			}
 			$weatherstring .= '</tr>';
 			
-			// row with weather infos			
+			// row with weather infos	
+			$date=new DateTime('now'); 
+			 
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+				
+				$date->modify('+' .$i .' day'); 
+			
 				$weatherstring .= '<td align="center">';
 				//@todo: image with weather code
-				$weatherstring .= $forecast[$i]->code;
+				$weatherstring .= $date->format('d-m-Y');
 				$weatherstring .= '<br>';
 				//@todo: replace weather code with beautiful text
 				$weatherstring .= $forecast[$i]->code;
