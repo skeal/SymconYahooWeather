@@ -73,8 +73,9 @@ class SymconYahooWeather extends IPSModule
 			// build header
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+				$date->modify('+' .$i .' day'); 
 				$weatherstring .= '<td align="center">';
-				$weatherstring .= $i;
+				$weatherstring .= $date->format('d.m.Y');
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
@@ -84,15 +85,61 @@ class SymconYahooWeather extends IPSModule
 			 
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				
-				$date->modify('+' .$i .' day'); 
-			
 				$weatherstring .= '<td align="center">';
 				//@todo: image with weather code
-				$weatherstring .= $date->format('d-m-Y');
+				$weatherstring .= $forecast[$i]->code;
 				$weatherstring .= '<br>';
 				//@todo: replace weather code with beautiful text
-				$weatherstring .= $forecast[$i]->code;
+				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
+				if ($forecast[$i]->code == '1') $weatherstring .= 'Tropischer Sturm'; 
+				if ($forecast[$i]->code == '2') $weatherstring .= 'Orkan'; 
+				if ($forecast[$i]->code == '3') $weatherstring .= 'Heftiges Gewitter'; 
+				if ($forecast[$i]->code == '4') $weatherstring .= 'Gewitter'; 
+				if ($forecast[$i]->code == '5') $weatherstring .= 'Regen und Schnee'; 
+				if ($forecast[$i]->code == '6') $weatherstring .= 'Regen und Eisregen'; 
+				if ($forecast[$i]->code == '7') $weatherstring .= 'Schnee und Eisregen'; 
+				if ($forecast[$i]->code == '8') $weatherstring .= 'Gefrierender Nieselregen'; 
+				if ($forecast[$i]->code == '9') $weatherstring .= 'Nieselregen'; 
+				if ($forecast[$i]->code == '10') $weatherstring .= 'Gefrierender Regen'; 
+				if ($forecast[$i]->code == '11') $weatherstring .= 'Schauer'; 
+				if ($forecast[$i]->code == '12') $weatherstring .= 'Schauer'; 
+				if ($forecast[$i]->code == '13') $weatherstring .= 'Schneeflocken'; 
+				if ($forecast[$i]->code == '14') $weatherstring .= 'Leichte Schneeschauer'; 
+				if ($forecast[$i]->code == '15') $weatherstring .= 'St&uuml;rmiger Schneefall'; 
+				if ($forecast[$i]->code == '16') $weatherstring .= 'Schnee'; 
+				if ($forecast[$i]->code == '17') $weatherstring .= 'Hagel'; 
+				if ($forecast[$i]->code == '18') $weatherstring .= 'Eisregen'; 
+				if ($forecast[$i]->code == '19') $weatherstring .= 'Staub'; 
+				if ($forecast[$i]->code == '20') $weatherstring .= 'Neblig'; 
+				if ($forecast[$i]->code == '21') $weatherstring .= 'Dunst'; 
+				if ($forecast[$i]->code == '22') $weatherstring .= 'Staubig'; 
+				if ($forecast[$i]->code == '23') $weatherstring .= 'St&uuml;rmisch'; 
+				if ($forecast[$i]->code == '24') $weatherstring .= 'Windig'; 
+				if ($forecast[$i]->code == '25') $weatherstring .= 'Kalt'; 
+				if ($forecast[$i]->code == '26') $weatherstring .= 'Bew&ouml;lkt'; 
+				if ($forecast[$i]->code == '27') $weatherstring .= 'Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(nachts)'; 
+				if ($forecast[$i]->code == '28') $weatherstring .= 'Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '29') $weatherstring .= 'Teilweise bew&ouml;lkt (nachts)'; 
+				if ($forecast[$i]->code == '30') $weatherstring .= 'Teilweise bew&ouml;lkt (tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '31') $weatherstring .= 'Klar (nachts)'; 
+				if ($forecast[$i]->code == '32') $weatherstring .= 'Sonnig'; 
+				if ($forecast[$i]->code == '33') $weatherstring .= 'Sch&ouml;n (nachts)'; 
+				if ($forecast[$i]->code == '34') $weatherstring .= 'Sch&ouml;n (tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '35') $weatherstring .= 'Regen und Hagel'; 
+				if ($forecast[$i]->code == '36') $weatherstring .= 'Hei&szlig;'; 
+				if ($forecast[$i]->code == '37') $weatherstring .= 'Einzelne Gewitter'; 
+				if ($forecast[$i]->code == '38') $weatherstring .= 'Vereinzelte Gewitter'; 
+				if ($forecast[$i]->code == '39') $weatherstring .= 'Vereinzelte Gewitter'; 
+				if ($forecast[$i]->code == '40') $weatherstring .= 'Vereinzelte Schauer'; 
+				if ($forecast[$i]->code == '41') $weatherstring .= 'Starker Schneefall'; 
+				if ($forecast[$i]->code == '42') $weatherstring .= 'Vereinzelte Schneeschauer'; 
+				if ($forecast[$i]->code == '43') $weatherstring .= 'Starker Schneefall'; 
+				if ($forecast[$i]->code == '44') $weatherstring .= 'Teilweise bew&ouml;lkt'; 
+				if ($forecast[$i]->code == '45') $weatherstring .= 'Donnerregen'; 
+				if ($forecast[$i]->code == '46') $weatherstring .= 'Schneeschauer'; 
+				if ($forecast[$i]->code == '47') $weatherstring .= 'Einzelne Gewitterschauer';
+
+				//$weatherstring .= $forecast[$i]->code;
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
@@ -101,10 +148,8 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
-				//@todo: image with weather code
 				$weatherstring .= $forecast[$i]->low .' &deg;' .$temperature;
 				$weatherstring .= '<br>';
-				//@todo: replace weather code with beautiful text
 				$weatherstring .= $forecast[$i]->high .' &deg;' .$temperature;
 				$weatherstring .= '</td>';
 			}
