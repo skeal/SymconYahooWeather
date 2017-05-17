@@ -65,7 +65,21 @@ class SymconYahooWeather extends IPSModule
 	private function GenerateWeatherTable($Value){
     	
     	if( $Value->query->count > 0 ){
-			return "Weather is fine.";
+			// build table
+			$weatherstring .= '<table width="100%">';
+			// build header
+			$weatherstring .= '<tr>';
+			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+				$weatherstring .= '<td align="center">';
+				$weatherstring .= $i;
+				$weatherstring .= '</td>';
+			}
+			$weatherstring .= '</tr>';
+			
+			
+			// finish table
+			$weatherstring .= '</table>';
+			return $weatherstring;
 		} 
 		else return "Weather is not available";
   	}
