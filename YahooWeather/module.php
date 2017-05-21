@@ -9,7 +9,6 @@ class SymconYahooWeather extends IPSModule
         
         //These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
-		$this->CreateVarProfileYWHTemp();
         
 		$this->RegisterPropertyString("YWHTown", "Konstanz");
 		$this->RegisterPropertyInteger("YWHDays", 2);
@@ -20,8 +19,8 @@ class SymconYahooWeather extends IPSModule
 		
 		// Vorhersage für heute als Variablen
 		$this->RegisterVariableString("YWH_Wetter_heute", "Wettervorhersage (heute)");
-		$this->RegisterVariableFloat("YWH_Heute_temp_min", "Temp (min)","YHW.Temp");
-		$this->RegisterVariableFloat("YWH_Heute_temp_max", "Temp (max)","YHW.Temp");
+		$this->RegisterVariableFloat("YWH_Heute_temp_min", "Temp (min)","~Temperature");
+		$this->RegisterVariableFloat("YWH_Heute_temp_max", "Temp (max)","~Temperature");
 		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
