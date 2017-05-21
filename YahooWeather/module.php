@@ -74,6 +74,7 @@ class SymconYahooWeather extends IPSModule
 		if (!IPS_VariableProfileExists("YHW.Temp")) {
 			IPS_CreateVariableProfile("YHW.Temp", 1);
 			IPS_SetVariableProfileValues("YHW.Temp", -100, 100, 1);
+			IPS_SetVariableProfileDigits("YHW.Temp", 0);
 			IPS_SetVariableProfileText("YHW.Temp", "", " °");
 			IPS_SetVariableProfileAssociation("YHW.Temp", -100, "%1f", "", -1);
 
