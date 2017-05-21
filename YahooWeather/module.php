@@ -206,6 +206,7 @@ class SymconYahooWeather extends IPSModule
 			$root = realpath(__DIR__ . "/Images");
 			IPS_LogMessage("WebHook root: ", $root);
 			
+			IPS_LogMessage("WebHook REQUEST_URI: ", $_SERVER['REQUEST_URI'] );
 			//append index.html
 			if(substr($_SERVER['REQUEST_URI'], -1) == "/") {
 				$_SERVER['REQUEST_URI'] .= "index.html";
