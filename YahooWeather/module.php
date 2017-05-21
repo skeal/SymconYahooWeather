@@ -18,6 +18,9 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
 		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
+		
+		// Inspired by module SymconTest/HookServe
+		$this->RegisterHook("/hook/SymconYahooWeather");
     }
     public function Destroy()
     {
@@ -89,8 +92,8 @@ class SymconYahooWeather extends IPSModule
 				$weatherstring .= '<td align="center">';
 				//@todo: image with weather code
 				$weatherstring .= $forecast[$i]->code;
+				//@end todo: image with weather code
 				$weatherstring .= '<br>';
-				//@todo: replace weather code with beautiful text
 				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
 				if ($forecast[$i]->code == '1') $weatherstring .= 'Tropischer Sturm'; 
 				if ($forecast[$i]->code == '2') $weatherstring .= 'Orkan'; 
@@ -173,5 +176,27 @@ class SymconYahooWeather extends IPSModule
 		$jsonDataFromURL = @file_get_contents($yql_query_url);
 		return json_decode($jsonDataFromURL);
   	}
+	
+	private function RegisterHook($WebHook) {
+		// Inspired from module SymconTest/HookServe
+		$ids = IPS_GetInstanceListByModuleID("{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}");
+		if(sizeof($ids) > 0) {
+			$hooks = json_decode(IPS_GetProperty($ids[0], "Hooks"), true);
+			$found = false;
+			foreach($hooks as $index => $hook) {
+				if($hook['Hook'] == $WebHook) {
+					if($hook['TargetID'] == $this->InstanceID)
+						return;
+					$hooks[$index]['TargetID'] = $this->InstanceID;
+					$found = true;
+				}
+			}
+			if(!$found) {
+				$hooks[] = Array("Hook" => $WebHook, "TargetID" => $this->InstanceID);
+			}
+			IPS_SetProperty($ids[0], "Hooks", json_encode($hooks));
+			IPS_ApplyChanges($ids[0]);
+		}
+	}
 }
 ?>
