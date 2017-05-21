@@ -1,7 +1,11 @@
 <?
 class SymconYahooWeather extends IPSModule
 {
-    public function Create()
+    private myModuleName = "SymconYahooWeather";
+	private myWebHook = "/hook/SymconYahooWeather";
+	
+	
+	public function Create()
     {
         //Never delete this line!
         parent::Create();
@@ -201,7 +205,7 @@ class SymconYahooWeather extends IPSModule
 	
 	protected function ProcessHookData() {
 			
-			$root = realpath(__DIR__ . "/www");
+			$root = realpath(__DIR__ . "/Images");
 			
 			//append index.html
 			if(substr($_SERVER['REQUEST_URI'], -1) == "/") {
@@ -209,7 +213,7 @@ class SymconYahooWeather extends IPSModule
 			}
 			
 			//reduce any relative paths. this also checks for file existance
-			$path = realpath($root . "/" . substr($_SERVER['REQUEST_URI'], strlen("/hook/hookserve/")));
+			$path = realpath($root . "/" . substr($_SERVER['REQUEST_URI'], strlen("/hook/SymconYahooWeather/")));
 			if($path === false) {
 				http_response_code(404);
 				die("File not found!");
