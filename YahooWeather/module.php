@@ -9,7 +9,7 @@ class SymconYahooWeather extends IPSModule
         
         //These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
-	
+		$this->CreateVarProfileYWHTemp();
         
 		$this->RegisterPropertyString("YWHTown", "Konstanz");
 		$this->RegisterPropertyInteger("YWHDays", 2);
@@ -20,8 +20,8 @@ class SymconYahooWeather extends IPSModule
 		
 		// Vorhersage für heute als Variablen
 		$this->RegisterVariableString("YWH_Wetter_heute", "Wettervorhersage (heute)");
-		$this->RegisterVariableInteger("YWH_Heute_temp_min", "Temp (min)","~Temperature");
-		$this->RegisterVariableInteger("YWH_Heute_temp_max", "Temp (max)","~Temperature");
+		$this->RegisterVariableInteger("YWH_Heute_temp_min", "Temp (min)","YHW.Temp");
+		$this->RegisterVariableInteger("YWH_Heute_temp_max", "Temp (max)","YHW.Temp");
 		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
@@ -69,6 +69,16 @@ class SymconYahooWeather extends IPSModule
     	SetValueString($id, $Value);
     	return true;
   	}
+	
+	private function CreateVarProfileYWHTemp() {
+		if (!IPS_VariableProfileExists("YHW.Temp")) {
+			IPS_CreateVariableProfile("YHW.Temp", 1);
+			IPS_SetVariableProfileValues("YHW.Temp", -100, 100, 1);
+			IPS_SetVariableProfileText("YHW.Temp", "", " °");
+			IPS_SetVariableProfileAssociation("YHW.Temp", -100, "%1f", "", -1);
+
+		 }
+	}
 	
 	private function GenerateWeatherTable($Value){
     	$weekdays = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
