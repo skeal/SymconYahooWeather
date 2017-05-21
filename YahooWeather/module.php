@@ -131,8 +131,8 @@ class SymconYahooWeather extends IPSModule
 				if ($forecast[0]->code == '47') $vorhersage_heute .= 'Einzelne Gewitterschauer';
 				
 			$this->SetValueString("YWH_Wetter_heute", $vorhersage_heute );
-			$this->SetValueInt("YWH_Heute_temp_min", $$forecast[0]->low );
-			$this->SetValueInt("YWH_Heute_temp_max", $$forecast[0]->high );
+			$this->SetValueInt("YWH_Heute_temp_min", $forecast[0]->low );
+			$this->SetValueInt("YWH_Heute_temp_max", $forecast[0]->high );
 			
 			// build table
 			$weatherstring = '<table width="100%">';
