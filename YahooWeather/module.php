@@ -1,9 +1,6 @@
 <?
 class SymconYahooWeather extends IPSModule
 {
-    private myModuleName = "SymconYahooWeather";
-	private myWebHook = "/hook/SymconYahooWeather";
-	
 	
 	public function Create()
     {
