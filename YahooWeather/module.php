@@ -81,7 +81,9 @@ class SymconYahooWeather extends IPSModule
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$date->modify('+' .$i .' day'); 
 				$weatherstring .= '<td align="center">';
-				$weatherstring .= $date->format('d.m.Y');
+				if( $i == 0) $weatherstring .= 'Heute';
+				if( $i == 1) $weatherstring .= 'Morgen';
+				else $weatherstring .= $date->format('d.m.Y');
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
@@ -91,8 +93,6 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '<tr>';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
-				//@todo: image with weather code
-				$weatherstring .= $forecast[$i]->code;
 				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png">';
 				//@end todo: image with weather code
 				$weatherstring .= '<br>';
@@ -202,13 +202,9 @@ class SymconYahooWeather extends IPSModule
 	}
 	
 	protected function ProcessHookData() {
-			
-			IPS_LogMessage("WebHook DIR: ", __DIR__);
+			// Inspired from module SymconTest/HookServe
 			
 			$root = realpath(__DIR__ . "/Images");
-			IPS_LogMessage("WebHook root: ", $root);
-			
-			IPS_LogMessage("WebHook REQUEST_URI: ", $_SERVER['REQUEST_URI'] );
 			//append index.html
 			if(substr($_SERVER['REQUEST_URI'], -1) == "/") {
 				$_SERVER['REQUEST_URI'] .= "index.html";
@@ -232,6 +228,7 @@ class SymconYahooWeather extends IPSModule
 		}
 		
 		private function GetMimeType($extension) {
+			// Inspired from module SymconTest/HookServe
 			$lines = file(IPS_GetKernelDirEx()."mime.types");
 			foreach($lines as $line) {
 				$type = explode("\t", $line, 2);
