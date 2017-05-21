@@ -203,6 +203,8 @@ class SymconYahooWeather extends IPSModule
 	
 	protected function ProcessHookData() {
 			
+			IPS_LogMessage("WebHook DIR: ", __DIR__);
+			
 			$root = realpath(__DIR__ . "/Images");
 			IPS_LogMessage("WebHook root: ", $root);
 			
@@ -211,8 +213,7 @@ class SymconYahooWeather extends IPSModule
 			if(substr($_SERVER['REQUEST_URI'], -1) == "/") {
 				$_SERVER['REQUEST_URI'] .= "index.html";
 			}
-			
-			
+						
 			//reduce any relative paths. this also checks for file existance
 			$path = realpath($root . "/" . substr($_SERVER['REQUEST_URI'], strlen("/hook/SymconYahooWeather/")));
 			IPS_LogMessage("WebHook path: ", $path);
