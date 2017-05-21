@@ -11,7 +11,7 @@ class SymconYahooWeather extends IPSModule
         //You cannot use variables here. Just static values.
 	
         
-		$this->RegisterPropertyString("YWHTown", "London");
+		$this->RegisterPropertyString("YWHTown", "Konstanz");
 		$this->RegisterPropertyInteger("YWHDays", 2);
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
 		$this->RegisterPropertyString("YWHTemperature","c");
