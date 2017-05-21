@@ -93,6 +93,7 @@ class SymconYahooWeather extends IPSModule
 				$weatherstring .= '<td align="center">';
 				//@todo: image with weather code
 				$weatherstring .= $forecast[$i]->code;
+				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png">';
 				//@end todo: image with weather code
 				$weatherstring .= '<br>';
 				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
