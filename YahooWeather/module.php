@@ -18,6 +18,11 @@ class SymconYahooWeather extends IPSModule
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
 		
+		// Vorhersage für heute als Variablen
+		$this->RegisterVariableString("YWH_Wetter_heute", "Wettervorhersage (heute)");
+		$this->RegisterVariableInteger("YWH_Heute_temp_min", "Temp (min)","~Temperature");
+		$this->RegisterVariableInteger("YWH_Heute_temp_max", "Temp (max)","~Temperature");
+		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
 		// Inspired by module SymconTest/HookServe
@@ -43,7 +48,6 @@ class SymconYahooWeather extends IPSModule
 		
 		// build nice layout
 		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON) );
-		
     }
 
     private function SetValueInt($Ident, $Value){
@@ -74,7 +78,62 @@ class SymconYahooWeather extends IPSModule
 		
     	if( $Value->query->count > 0 ){
 			$date=new DateTime('now'); 
-			 
+			
+			$vorhersage_heute = "";
+			
+			if ($forecast[$i]->code == '0') $vorhersage_heute .= 'Tornado'; 
+				if ($forecast[$i]->code == '1') $vorhersage_heute .= 'Tropischer Sturm'; 
+				if ($forecast[$i]->code == '2') $vorhersage_heute .= 'Orkan'; 
+				if ($forecast[$i]->code == '3') $vorhersage_heute .= 'Heftiges Gewitter'; 
+				if ($forecast[$i]->code == '4') $vorhersage_heute .= 'Gewitter'; 
+				if ($forecast[$i]->code == '5') $vorhersage_heute .= 'Regen und Schnee'; 
+				if ($forecast[$i]->code == '6') $vorhersage_heute .= 'Regen und Eisregen'; 
+				if ($forecast[$i]->code == '7') $vorhersage_heute .= 'Schnee und Eisregen'; 
+				if ($forecast[$i]->code == '8') $vorhersage_heute .= 'Gefrierender Nieselregen'; 
+				if ($forecast[$i]->code == '9') $vorhersage_heute .= 'Nieselregen'; 
+				if ($forecast[$i]->code == '10') $vorhersage_heute .= 'Gefrierender Regen'; 
+				if ($forecast[$i]->code == '11') $vorhersage_heute .= 'Schauer'; 
+				if ($forecast[$i]->code == '12') $vorhersage_heute .= 'Schauer'; 
+				if ($forecast[$i]->code == '13') $vorhersage_heute .= 'Schneeflocken'; 
+				if ($forecast[$i]->code == '14') $vorhersage_heute .= 'Leichte Schneeschauer'; 
+				if ($forecast[$i]->code == '15') $vorhersage_heute .= 'St&uuml;rmiger Schneefall'; 
+				if ($forecast[$i]->code == '16') $vorhersage_heute .= 'Schnee'; 
+				if ($forecast[$i]->code == '17') $vorhersage_heute .= 'Hagel'; 
+				if ($forecast[$i]->code == '18') $vorhersage_heute .= 'Eisregen'; 
+				if ($forecast[$i]->code == '19') $vorhersage_heute .= 'Staub'; 
+				if ($forecast[$i]->code == '20') $vorhersage_heute .= 'Neblig'; 
+				if ($forecast[$i]->code == '21') $vorhersage_heute .= 'Dunst'; 
+				if ($forecast[$i]->code == '22') $vorhersage_heute .= 'Staubig'; 
+				if ($forecast[$i]->code == '23') $vorhersage_heute .= 'St&uuml;rmisch'; 
+				if ($forecast[$i]->code == '24') $vorhersage_heute .= 'Windig'; 
+				if ($forecast[$i]->code == '25') $vorhersage_heute .= 'Kalt'; 
+				if ($forecast[$i]->code == '26') $vorhersage_heute .= 'Bew&ouml;lkt'; 
+				if ($forecast[$i]->code == '27') $vorhersage_heute .= 'Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(nachts)'; 
+				if ($forecast[$i]->code == '28') $vorhersage_heute .= 'Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '29') $vorhersage_heute .= 'Teilweise bew&ouml;lkt (nachts)'; 
+				if ($forecast[$i]->code == '30') $vorhersage_heute .= 'Teilweise bew&ouml;lkt (tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '31') $vorhersage_heute .= 'Klar (nachts)'; 
+				if ($forecast[$i]->code == '32') $vorhersage_heute .= 'Sonnig'; 
+				if ($forecast[$i]->code == '33') $vorhersage_heute .= 'Sch&ouml;n (nachts)'; 
+				if ($forecast[$i]->code == '34') $vorhersage_heute .= 'Sch&ouml;n (tags&uuml;ber)'; 
+				if ($forecast[$i]->code == '35') $vorhersage_heute .= 'Regen und Hagel'; 
+				if ($forecast[$i]->code == '36') $vorhersage_heute .= 'Hei&szlig;'; 
+				if ($forecast[$i]->code == '37') $vorhersage_heute .= 'Einzelne Gewitter'; 
+				if ($forecast[$i]->code == '38') $vorhersage_heute .= 'Vereinzelte Gewitter'; 
+				if ($forecast[$i]->code == '39') $vorhersage_heute .= 'Vereinzelte Gewitter'; 
+				if ($forecast[$i]->code == '40') $vorhersage_heute .= 'Vereinzelte Schauer'; 
+				if ($forecast[$i]->code == '41') $vorhersage_heute .= 'Starker Schneefall'; 
+				if ($forecast[$i]->code == '42') $vorhersage_heute .= 'Vereinzelte Schneeschauer'; 
+				if ($forecast[$i]->code == '43') $vorhersage_heute .= 'Starker Schneefall'; 
+				if ($forecast[$i]->code == '44') $vorhersage_heute .= 'Teilweise bew&ouml;lkt'; 
+				if ($forecast[$i]->code == '45') $vorhersage_heute .= 'Donnerregen'; 
+				if ($forecast[$i]->code == '46') $vorhersage_heute .= 'Schneeschauer'; 
+				if ($forecast[$i]->code == '47') $vorhersage_heute .= 'Einzelne Gewitterschauer';
+				
+			$this->SetValueString("YWH_Wetter_heute", $vorhersage_heute );
+			$this->SetValueString("YWH_Heute_temp_min", $$forecast[0]->low );
+			$this->SetValueString("YWH_Heute_temp_max", $$forecast[0]->high );
+			
 			// build table
 			$weatherstring = '<table width="100%">';
 			// build header
