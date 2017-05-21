@@ -20,8 +20,8 @@ class SymconYahooWeather extends IPSModule
 		
 		// Vorhersage für heute als Variablen
 		$this->RegisterVariableString("YWH_Wetter_heute", "Wettervorhersage (heute)");
-		$this->RegisterVariableInteger("YWH_Heute_temp_min", "Temp (min)","YHW.Temp");
-		$this->RegisterVariableInteger("YWH_Heute_temp_max", "Temp (max)","YHW.Temp");
+		$this->RegisterVariableFloat("YWH_Heute_temp_min", "Temp (min)","YHW.Temp");
+		$this->RegisterVariableFloat("YWH_Heute_temp_max", "Temp (max)","YHW.Temp");
 		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
@@ -142,8 +142,8 @@ class SymconYahooWeather extends IPSModule
 				if ($forecast[0]->code == '47') $vorhersage_heute .= 'Einzelne Gewitterschauer';
 				
 			$this->SetValueString("YWH_Wetter_heute", $vorhersage_heute );
-			$this->SetValueInt("YWH_Heute_temp_min", $forecast[0]->low );
-			$this->SetValueInt("YWH_Heute_temp_max", $forecast[0]->high );
+			$this->SetValueFloat("YWH_Heute_temp_min", $forecast[0]->low );
+			$this->SetValueFloat("YWH_Heute_temp_max", $forecast[0]->high );
 			
 			// build table
 			$weatherstring = '<table width="100%">';
