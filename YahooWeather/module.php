@@ -198,5 +198,45 @@ class SymconYahooWeather extends IPSModule
 			IPS_ApplyChanges($ids[0]);
 		}
 	}
+	
+	protected function ProcessHookData() {
+			
+			$root = realpath(__DIR__ . "/www");
+			
+			//append index.html
+			if(substr($_SERVER['REQUEST_URI'], -1) == "/") {
+				$_SERVER['REQUEST_URI'] .= "index.html";
+			}
+			
+			//reduce any relative paths. this also checks for file existance
+			$path = realpath($root . "/" . substr($_SERVER['REQUEST_URI'], strlen("/hook/hookserve/")));
+			if($path === false) {
+				http_response_code(404);
+				die("File not found!");
+			}
+			
+			if(substr($path, 0, strlen($root)) != $root) {
+				http_response_code(403);
+				die("Security issue. Cannot leave root folder!");
+			}
+			header("Content-Type: ".$this->GetMimeType(pathinfo($path, PATHINFO_EXTENSION)));
+			readfile($path);
+		}
+		
+		private function GetMimeType($extension) {
+			$lines = file(IPS_GetKernelDirEx()."mime.types");
+			foreach($lines as $line) {
+				$type = explode("\t", $line, 2);
+				if(sizeof($type) == 2) {
+					$types = explode(" ", trim($type[1]));
+					foreach($types as $ext) {
+						if($ext == $extension) {
+							return $type[0];
+						}
+					}
+				}
+			}
+			return "text/plain";
+		}
 }
 ?>
