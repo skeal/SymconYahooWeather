@@ -67,7 +67,7 @@ class SymconYahooWeather extends IPSModule
   	}
 	
 	private function GenerateWeatherTable($Value){
-    	$tage = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
+    	$weekdays = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
 		$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
@@ -86,7 +86,7 @@ class SymconYahooWeather extends IPSModule
 				if( $i == 1) $weatherstring .= 'Morgen';
 				else { 
 					$day = date("w")+$i;
-					$weatherstring .= $tage[$tag];
+					$weatherstring .= $weekdays[$day];
 				}
 				$weatherstring .= '</td>';
 			}
