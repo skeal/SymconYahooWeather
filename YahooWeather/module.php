@@ -213,11 +213,12 @@ class SymconYahooWeather extends IPSModule
 			
 			//reduce any relative paths. this also checks for file existance
 			$path = realpath($root . "/" . substr($_SERVER['REQUEST_URI'], strlen("/hook/SymconYahooWeather/")));
+			IPS_LogMessage("WebHook path: ", $path);
 			if($path === false) {
 				http_response_code(404);
 				die("File not found!");
 			}
-			IPS_LogMessage("WebHook path: ", $path);
+
 			
 			if(substr($path, 0, strlen($root)) != $root) {
 				http_response_code(403);
