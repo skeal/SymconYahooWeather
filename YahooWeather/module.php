@@ -81,13 +81,9 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '<tr>';
 			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				$weatherstring .= '<td align="center">';
-				if( $i == 0) $weatherstring .= 'Heute';
-				if( $i == 1) $weatherstring .= 'Morgen';
-				else { 
-					$day = date("w")+$i;
-					$weatherstring .= $weekdays[$day];
-				}
+				$weatherstring .= '<td align="center">'; 
+				$day = date("w")+$i;
+				$weatherstring .= $weekdays[$day];
 				$weatherstring .= '</td>';
 			}
 			$weatherstring .= '</tr>';
