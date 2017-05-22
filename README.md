@@ -18,7 +18,7 @@ Inspiriert durch: http://www.code-naschen.de/2011/11/wetter-api-fur-php-yahoo-we
 
 
 ## 2. Systemanforderungen
-- IP-Symcon ab Version 4.x
+- IP-Symcon ab Version 4.2
 
 
 ## 3. Installation
