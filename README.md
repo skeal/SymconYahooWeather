@@ -50,4 +50,4 @@ keine Befehle
 ## 5. Changelog
 
 v1.0 first release
-
+v1.1 update image zoom
