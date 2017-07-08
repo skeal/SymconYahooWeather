@@ -14,6 +14,8 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterPropertyInteger("YWHDays", 2);
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
 		$this->RegisterPropertyString("YWHTemperature","c");
+		$this->RegisterPropertyInteger("YWHImageZoom", 100);
+		
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
 		
@@ -159,9 +161,12 @@ class SymconYahooWeather extends IPSModule
 			// row with weather infos	
 
 			$weatherstring .= '<tr>';
+			
+			//20170708 update zoom images
+			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
-				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png">';
+				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom"); .'%;">';
 				//@end todo: image with weather code
 				$weatherstring .= '<br>';
 				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
