@@ -36,6 +36,7 @@ Name der Stadt | Stadt eingeben (Default: Konstanz)
 Intervall | Angabe in Millisekunden (Default: 14400))
 Temperaturanzeige | Auswahl Celsius oder Fahrenheit (Default: Celsius))
 Anzeige Tage | Auswahl 1-5 Tage (Default: 2))
+Bild-Zoom (%) | Zoom-Faktor für das Anzeigebild (Default: 100, Werte in %))
 
 Anzeige:
 
