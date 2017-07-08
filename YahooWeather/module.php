@@ -166,7 +166,7 @@ class SymconYahooWeather extends IPSModule
 			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
-				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;">';
+				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width: ' .$this->ReadPropertyInteger("YWHImageZoom") .'%;">';
 				//@end todo: image with weather code
 				$weatherstring .= '<br>';
 				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
