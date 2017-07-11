@@ -7,8 +7,9 @@
 1. [Funktionsumfang](#1-funktionsumfang) 
 2. [Systemanforderungen](#2-systemanforderungen)
 3. [Installation](#3-installation)
-4. [Befehlsreferenz](#4-befehlsreferenz)
-5. [Changelog](#5-changelog) 
+4. [Variablen](#4-variablen)
+5. [Befehlsreferenz](#5-befehlsreferenz)
+6. [Changelog](#6-changelog) 
 
 
 ## 1. Funktionsumfang
@@ -30,7 +31,6 @@ Die neue Instanz findet ihr dort, wo ihr sie angelegt habt.
 
 Konfiguration:
 
-Anzeige:
 
 Das Modul erzeugt eine Variable mit Standardprofil ~HTML-Box, welche im Webfront
 angezeigt werden kann. Die Anzeige der Bilder erfolgt über einen Webhook. Für die
@@ -45,6 +45,8 @@ Temperaturanzeige | Auswahl Celsius oder Fahrenheit (Default: Celsius))
 Anzeige Tage | Auswahl 1-5 Tage (Default: 2))
 Anzeige HTMLBox | Auswahl Anzeige mit oder ohne Bild (Default: Bild und Text))
 Bild-Zoom (%) | Zoom-Faktor für das Anzeigebild (Default: 100, Werte in %))
+
+## 4. Variablen
 
 Das Modul legt folgende Variablen an:
 
@@ -64,11 +66,11 @@ Windgeschwindigkeit (heute) | String | Anzeige Windgeschwindigkeit in km/h für 
 
 
 
-## 4. Befehlsreferenz
+## 5. Befehlsreferenz
 
 keine Befehle
 
-## 5. Changelog
+## 6. Changelog
 
 v1.0 first release
 
