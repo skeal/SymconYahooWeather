@@ -50,7 +50,7 @@ Das Modul legt folgende Variablen an:
 
 
 Variable | Typ | Beschreibung
------- | ---------------------------------
+------ | ------ | ---------------------------------
 Wetter | String | HTML Darstellung der Vorhersage gem. Einstellungen
 Luftdruck (heute) | String | Anzeige Luftdruck in Millibar für den aktuellen Tag
 Luftfeuchtigkeit (heute) | String | Anzeige Luftfeuchtigkeit in % für den aktuellen Tag
