@@ -33,6 +33,8 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterVariableString("YWH_Sichtweite", "Sichtweite (heute)");
 		$this->RegisterVariableString("YWH_WindGeschwindigkeit", "Windgeschwindigkeit (heute)");
 		
+		$this->RegisterVariableString("YWH_WetterImage", "WetterImage (heute)");
+		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
 		// Inspired by module SymconTest/HookServe
@@ -118,6 +120,8 @@ class SymconYahooWeather extends IPSModule
 		$this->setValueString("YWH_Luftdruck", $luftDruck );
 		$this->setValueString("YWH_Sichtweite", $sichtweite );
 		$this->setValueString("YWH_WindGeschwindigkeit", $windGeschwindigkeit );
+		
+		$this->setValueString("YWH_WetterImage", "/hook/SymconYahooWeather/" .$forecast[0]->code .".png" );
 		
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));

@@ -63,6 +63,7 @@ Temp (max) | String | Anzeige Maximaltemperatur für den aktuellen Tag
 Temp (min) | String | Anzeige Minimaltemperatur für den aktuellen Tag
 Wettervorhersage (heute) | String | Wettervorhersage in Textform für den aktuellen Tag
 Windgeschwindigkeit (heute) | String | Anzeige Windgeschwindigkeit in km/h für den aktuellen Tag
+WetterImage (heute) | String | BildUrl für den aktuellen Tag
 
 
 
