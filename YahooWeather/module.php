@@ -24,6 +24,9 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterVariableFloat("YWH_Heute_temp_min", "Temp (min)","~Temperature");
 		$this->RegisterVariableFloat("YWH_Heute_temp_max", "Temp (max)","~Temperature");
 		
+		$this->RegisterVariableString("YWH_Sonnenaufgang", "Sonnenaufgang (heute)");
+		$this->RegisterVariableString("YWH_Sonnenuntergang", "Sonnenuntergang (heute)");
+		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
 		// Inspired by module SymconTest/HookServe
@@ -84,6 +87,19 @@ class SymconYahooWeather extends IPSModule
 	private function GenerateWeatherTable($Value){
     	$weekdays = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
 		$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
+		
+		$sonnenAufgang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunrise'};
+		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
+		
+		$sonnenAufgang = str_replace('am', 'h', $sonnenAufgang);
+		$sonnenUntergang = str_replace('pm', 'h', $sonnenAufgang);
+		
+		IPS_LogMessage("SymconYahooWeather", "Sonnenaufgang: ". $sonnenAufgang);
+		IPS_LogMessage("SymconYahooWeather", "Sonnenuntergang: ". $sonnenUntergang);
+		
+		$this->setValueString("YWH_Sonnenaufgang", $sonnenAufgang);
+		$this->setValueString("YWH_Sonnenuntergang", $sonnenUntergang);
+		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
 		
