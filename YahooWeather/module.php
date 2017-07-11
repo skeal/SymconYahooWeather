@@ -142,14 +142,18 @@ class SymconYahooWeather extends IPSModule
 			
 			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				
+				/*
+					{ "label": "Bild und Text", "value":"1" },
+					{ "label": "Nur Bild", "value":"2" },
+					{ "label": "Nur Text", "value":"3" }
+				*/
 				if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
 				
 					$weatherstring .= '<td align="center">';
 					$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
 					$weatherstring .= '<br>';
 				}
-				if( $HTMLBoxType == 2 ){
+				if( $HTMLBoxType == 1 OR $HTMLBoxType == 3 ){
 					$weatherstring = $this->getWeatherCondition($forecast[$i]->code);
 				}
 				
@@ -158,17 +162,18 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring .= '</td>';
 			$weatherstring .= '</tr>';
 			
-			// row with weather temperature			
-			$weatherstring .= '<tr>';
-			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				$weatherstring .= '<td align="center">';
-				$weatherstring .= 'min ' .$forecast[$i]->low .' &deg;' .$temperature;
-				$weatherstring .= '<br>';
-				$weatherstring .= 'max ' .$forecast[$i]->high .' &deg;' .$temperature;
-				$weatherstring .= '</td>';
+			if( $HTMLBoxType == 1 OR $HTMLBoxType == 3 ){
+				// row with weather temperature			
+				$weatherstring .= '<tr>';
+				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+					$weatherstring .= '<td align="center">';
+					$weatherstring .= 'min ' .$forecast[$i]->low .' &deg;' .$temperature;
+					$weatherstring .= '<br>';
+					$weatherstring .= 'max ' .$forecast[$i]->high .' &deg;' .$temperature;
+					$weatherstring .= '</td>';
+				}
+				$weatherstring .= '</tr>';
 			}
-			$weatherstring .= '</tr>';
-			
 			
 			
 			// finish table
