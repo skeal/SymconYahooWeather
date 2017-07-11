@@ -128,7 +128,7 @@ class SymconYahooWeather extends IPSModule
 			//IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $this->ReadPropertyInteger("YWHDisplay"));
 			//IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $HTMLBoxType);
 			
-			if( $HTMLBoxType != 2 ){	
+			if( $HTMLBoxType == 1 ){	
 				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 					$weatherstring .= '<td align="center">'; 
 					$day = date("w")+$i;
@@ -169,6 +169,8 @@ class SymconYahooWeather extends IPSModule
 			
 			// finish table
 			$weatherstring .= '</table>';
+			
+			IPS_LogMessage("SymconYahooWeather", "weatherstring: ". $weatherstring);
 			return $weatherstring;
 		} 
 		else return "Weather is not available";
