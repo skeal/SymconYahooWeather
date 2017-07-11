@@ -85,6 +85,14 @@ class SymconYahooWeather extends IPSModule
 		 }
 	}
 	
+	private function CreateVarProfileYWHTime() {
+		if (!IPS_VariableProfileExists("YHW.Time")) {
+			IPS_CreateVariableProfile("YHW.Time", 1);
+			IPS_SetVariableProfileText("YHW.Time", "", " Uhr");
+			IPS_SetVariableProfileAssociation("YHW.Time", "", "%1f", "", -1);
+		 }
+	}
+	
 	private function GenerateWeatherTable($Value){
     	$weekdays = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
 		$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
@@ -92,15 +100,12 @@ class SymconYahooWeather extends IPSModule
 		$sonnenAufgang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunrise'};
 		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
 		
-		IPS_LogMessage("SymconYahooWeather", "Sonnenaufgang: ". date("H:i",strtotime($sonnenAufgang)));
-		IPS_LogMessage("SymconYahooWeather", "Sonnenuntergang: ". date("H:i",strtotime($sonnenUntergang)));
-		
-		$this->setValueString("YWH_Sonnenaufgang", date("H:i",strtotime($sonnenAufgang)));
-		$this->setValueString("YWH_Sonnenuntergang", date("H:i",strtotime($sonnenUntergang)));
+		$this->setValueString("YWH_Sonnenaufgang", date("H:i",strtotime($sonnenAufgang)) ." Uhr");
+		$this->setValueString("YWH_Sonnenuntergang", date("H:i",strtotime($sonnenUntergang)) ." Uhr");
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
-		IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $this->ReadPropertyInteger("YWHDisplay"));
+		
 		
     	if( $Value->query->count > 0 ){
 			$date=new DateTime('now'); 
@@ -119,6 +124,10 @@ class SymconYahooWeather extends IPSModule
 			// build header with weekdays
 
 			$weatherstring .= '<tr>';
+			
+			IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $this->ReadPropertyInteger("YWHDisplay"));
+			IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $HTMLBoxType);
+			
 			if( $HTMLBoxType == 1 ){	
 				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 					$weatherstring .= '<td align="center">'; 
