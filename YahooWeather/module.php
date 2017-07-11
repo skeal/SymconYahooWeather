@@ -125,47 +125,35 @@ class SymconYahooWeather extends IPSModule
 			
 			// build table
 			$weatherstring = '<table width="100%">';
-			// build header
-			
-			if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
-				$weatherstring .= '<tr>';
-				
+			// build header with weekdays
+
+			$weatherstring .= '<tr>';
+			if( $HTMLBoxType == 1 ){	
 				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 					$weatherstring .= '<td align="center">'; 
 					$day = date("w")+$i;
 					$weatherstring .= $weekdays[$day];
 					$weatherstring .= '</td>';
 				}
-				$weatherstring .= '</tr>';
-				
-				// row with weather infos	
-
-				$weatherstring .= '<tr>';
 			}
+			$weatherstring .= '</tr>';
+				
+			// row with weather infos (image + description)	
+			$weatherstring .= '<tr>';
+			
 			$weatherstring .= '<td align="center">';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				/*
-					{ "label": "Bild und Text", "value":"1" },
-					{ "label": "Nur Bild", "value":"2" },
-					{ "label": "Nur Text", "value":"3" }
-				*/
-				if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
-				
-					
-					$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
-					
-				}
-				if( $HTMLBoxType == 1 OR $HTMLBoxType == 3 ){
+				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
+
+				if( $HTMLBoxType == 1 ){
 					$weatherstring .= '<br>';
 					$weatherstring = $this->getWeatherCondition($forecast[$i]->code);
 				}
-				
-				
 			}
 			$weatherstring .= '</td>';
 			$weatherstring .= '</tr>';
 			
-			if( $HTMLBoxType == 1 OR $HTMLBoxType == 3 ){
+			if( $HTMLBoxType == 1 ){
 				// row with weather temperature			
 				$weatherstring .= '<tr>';
 				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){

@@ -21,8 +21,7 @@
 	{ "type": "Select", "name": "YWHDisplay", "caption": "Anzeige HTMLBox",
 		"options": [
 			{ "label": "Bild und Text", "value":"1" },
-			{ "label": "Nur Bild", "value":"2" },
-			{ "label": "Nur Text", "value":"3" }
+			{ "label": "Nur Bild", "value":"2" }
 		]
 	},
 	{ "type": "IntervalBox", "name": "YWHImageZoom", "caption": "Bild-Zoom (%)" }
