@@ -15,6 +15,7 @@ class SymconYahooWeather extends IPSModule
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
 		$this->RegisterPropertyString("YWHTemperature","c");
 		$this->RegisterPropertyInteger("YWHImageZoom", 100);
+		$this->RegisterPropertyInteger("YWHDisplay", 1;
 		
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
@@ -92,6 +93,7 @@ class SymconYahooWeather extends IPSModule
 		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
 		
 		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". date("H:i:s",strtotime($sonnenAufgang)));
+		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". date("H:i:s",strtotime($sonnenUntergang)));
 		
 		$sonnenAufgang = str_replace('am', 'Uhr', $sonnenAufgang);
 		$sonnenUntergang = str_replace('pm', 'Uhr', $sonnenUntergang);
@@ -110,6 +112,8 @@ class SymconYahooWeather extends IPSModule
 			$date=new DateTime('now'); 
 			
 			$vorhersage_heute = "";
+			
+			IPS_LogMessage("SymconYahooWeather", "WeatherCondition: ". $this->getWeatherCondition($forecast[0]->code));
 			
 			if ($forecast[0]->code == '0') $vorhersage_heute .= 'Tornado'; 
 				if ($forecast[0]->code == '1') $vorhersage_heute .= 'Tropischer Sturm'; 
@@ -164,6 +168,8 @@ class SymconYahooWeather extends IPSModule
 			$this->SetValueFloat("YWH_Heute_temp_min", $forecast[0]->low );
 			$this->SetValueFloat("YWH_Heute_temp_max", $forecast[0]->high );
 			
+			$HTMLBoxType = $this->ReadPropertyInteger("YWHDisplay");
+			
 			// build table
 			$weatherstring = '<table width="100%">';
 			// build header
@@ -184,10 +190,14 @@ class SymconYahooWeather extends IPSModule
 			//20170708 update zoom images
 			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				$weatherstring .= '<td align="center">';
-				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
-				//@end todo: image with weather code
-				$weatherstring .= '<br>';
+				
+				if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
+				
+					$weatherstring .= '<td align="center">';
+					$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
+					$weatherstring .= '<br>';
+				}
+				
 				if ($forecast[$i]->code == '0') $weatherstring .= 'Tornado'; 
 				if ($forecast[$i]->code == '1') $weatherstring .= 'Tropischer Sturm'; 
 				if ($forecast[$i]->code == '2') $weatherstring .= 'Orkan'; 
@@ -334,6 +344,61 @@ class SymconYahooWeather extends IPSModule
 				}
 			}
 			return "text/plain";
+		}
+		
+		private function getWeatherCondition( $condition ){
+			
+			$weathercondition = array (
+				"0" => "Tornado",
+				"1" => "Tropischer Sturm", 
+				"2" => "Orkan", 
+				"3" => "Heftiges Gewitter", 
+				"4" => "Gewitter", 
+				"5" => "Regen und Schnee", 
+				"6" => "Regen und Eisregen", 
+				"7" => "Schnee und Eisregen", 
+				"8" => "Gefrierender Nieselregen", 
+				"9" => "Nieselregen", 
+				"10" => "Gefrierender Regen", 
+				"11" => "Schauer", 
+				"12" => "Schauer", 
+				"13" => "Schneeflocken", 
+				"14" => "Leichte Schneeschauer", 
+				"15" => "St&uuml;rmiger Schneefall", 
+				"16" => "Schnee", 
+				"17" => "Hagel", 
+				"18" => "Eisregen", 
+				"19" => "Staub", 
+				"20" => "Neblig", 
+				"21" => "Dunst", 
+				"22" => "Staubig", 
+				"23" => "St&uuml,rmisch", 
+				"24" => "Windig", 
+				"25" => "Kalt", 
+				"26" => "Bew&ouml;lkt", 
+				"27" => "Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(nachts)", 
+				"28" => "Gr&ouml&szlig;tenteils bew&ouml;lkt<br>(tags&uuml;ber)", 
+				"29" => "Teilweise bew&ouml;lkt (nachts)", 
+				"30" => "Teilweise bew&ouml;lkt (tags&uuml;ber)", 
+				"31" => "Klar (nachts)", 
+				"32" => "Sonnig", 
+				"33" => "Sch&ouml;n (nachts)", 
+				"34" => "Sch&ouml;n (tags&uuml;ber)", 
+				"35" => "Regen und Hagel", 
+				"36" => "Hei&szlig;", 
+				"37" => "Einzelne Gewitter", 
+				"38" => "Vereinzelte Gewitter", 
+				"39" => "Vereinzelte Gewitter", 
+				"40" => "Vereinzelte Schauer", 
+				"41" => "Starker Schneefall", 
+				"42" => "Vereinzelte Schneeschauer", 
+				"43" => "Starker Schneefall", 
+				"44" => "Teilweise bew&ouml;lkt", 
+				"45" => "Donnerregen", 
+				"46" => "Schneeschauer", 
+				"47" => "Einzelne Gewitterschauer",
+				);
+			return $weathercondition[$condition];
 		}
 }
 ?>
