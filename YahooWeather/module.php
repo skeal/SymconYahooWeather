@@ -91,7 +91,7 @@ class SymconYahooWeather extends IPSModule
 		$sonnenAufgang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunrise'};
 		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
 		
-		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". strtotime($sonnenAufgang));
+		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". date("H:i:s",strtotime($sonnenAufgang));
 		
 		$sonnenAufgang = str_replace('am', 'Uhr', $sonnenAufgang);
 		$sonnenUntergang = str_replace('pm', 'Uhr', $sonnenUntergang);
