@@ -92,18 +92,11 @@ class SymconYahooWeather extends IPSModule
 		$sonnenAufgang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunrise'};
 		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
 		
-		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". date("H:i:s",strtotime($sonnenAufgang)));
-		IPS_LogMessage("SymconYahooWeather", "strtotime-Sonnenaufgang: ". date("H:i:s",strtotime($sonnenUntergang)));
+		IPS_LogMessage("SymconYahooWeather", "Sonnenaufgang: ". date("H:i",strtotime($sonnenAufgang)));
+		IPS_LogMessage("SymconYahooWeather", "Sonnenuntergang: ". date("H:i",strtotime($sonnenUntergang)));
 		
-		$sonnenAufgang = str_replace('am', 'Uhr', $sonnenAufgang);
-		$sonnenUntergang = str_replace('pm', 'Uhr', $sonnenUntergang);
-		
-		
-		IPS_LogMessage("SymconYahooWeather", "Sonnenaufgang: ". $sonnenAufgang);
-		IPS_LogMessage("SymconYahooWeather", "Sonnenuntergang: ". $sonnenUntergang);
-		
-		$this->setValueString("YWH_Sonnenaufgang", $sonnenAufgang);
-		$this->setValueString("YWH_Sonnenuntergang", $sonnenUntergang);
+		$this->setValueString("YWH_Sonnenaufgang", date("H:i",strtotime($sonnenAufgang)));
+		$this->setValueString("YWH_Sonnenuntergang", date("H:i",strtotime($sonnenUntergang)));
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
