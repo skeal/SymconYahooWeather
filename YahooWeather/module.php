@@ -142,7 +142,7 @@ class SymconYahooWeather extends IPSModule
 
 				$weatherstring .= '<tr>';
 			}
-			
+			$weatherstring .= '<td align="center">';
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				/*
 					{ "label": "Bild und Text", "value":"1" },
@@ -151,7 +151,7 @@ class SymconYahooWeather extends IPSModule
 				*/
 				if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
 				
-					$weatherstring .= '<td align="center">';
+					
 					$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
 					
 				}
