@@ -28,6 +28,11 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterVariableString("YWH_Sonnenaufgang", "Sonnenaufgang (heute)");
 		$this->RegisterVariableString("YWH_Sonnenuntergang", "Sonnenuntergang (heute)");
 		
+		$this->RegisterVariableString("YWH_Luftfeuchtigkeit", "Luftfeuchtigkeit (heute)");
+		$this->RegisterVariableString("YWH_Luftdruck", "Luftdruck (heute)");
+		$this->RegisterVariableString("YWH_Sichtweite", "Sichtweite (heute)");
+		$this->RegisterVariableString("YWH_WindGeschwindigkeit", "Windgeschwindigkeit (heute)");
+		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
 		// Inspired by module SymconTest/HookServe
@@ -100,8 +105,20 @@ class SymconYahooWeather extends IPSModule
 		$sonnenAufgang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunrise'};
 		$sonnenUntergang = $Value->{'query'}->{'results'}->{'channel'}->{'astronomy'}->{'sunset'};
 		
+		$luftFeuchtigkeit = $Value->{'query'}->{'results'}->{'channel'}->{'atmosphere'}->{'humidity'} ." %";
+		$luftDruck = $Value->{'query'}->{'results'}->{'channel'}->{'atmosphere'}->{'pressure'} ." " .$Value->{'query'}->{'results'}->{'channel'}->{'units'}->{'pressure'};
+		$sichtweite = $Value->{'query'}->{'results'}->{'channel'}->{'atmosphere'}->{'visibility'} ." " .$Value->{'query'}->{'results'}->{'channel'}->{'units'}->{'distance'};
+		$windGeschwindigkeit = $Value->{'query'}->{'results'}->{'channel'}->{'wind'}->{'speed'} ." " .$Value->{'query'}->{'results'}->{'channel'}->{'units'}->{'speed'};
+		
+		
 		$this->setValueString("YWH_Sonnenaufgang", date("H:i",strtotime($sonnenAufgang)) ." Uhr");
 		$this->setValueString("YWH_Sonnenuntergang", date("H:i",strtotime($sonnenUntergang)) ." Uhr");
+		
+		$this->setValueString("YWH_Luftfeuchtigkeit", $luftFeuchtigkeit );
+		$this->setValueString("YWH_Luftdruck", $luftDruck );
+		$this->setValueString("YWH_Sichtweite", $sichtweite );
+		$this->setValueString("YWH_WindGeschwindigkeit", $windGeschwindigkeit );
+		
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
