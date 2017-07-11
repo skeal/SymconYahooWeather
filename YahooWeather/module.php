@@ -151,11 +151,11 @@ class SymconYahooWeather extends IPSModule
 				}
 				if( $HTMLBoxType == 2 ){
 					$weatherstring = $this->getWeatherCondition($forecast[$i]->code);
-					$weatherstring .= '</td>';
 				}
 				
 				
 			}
+			$weatherstring .= '</td>';
 			$weatherstring .= '</tr>';
 			
 			// row with weather temperature			
