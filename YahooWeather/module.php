@@ -107,14 +107,12 @@ class SymconYahooWeather extends IPSModule
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));
 		
+		IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $this->ReadPropertyInteger("YWHDisplay"));
 		
     	if( $Value->query->count > 0 ){
 			$date=new DateTime('now'); 
 			
 			$vorhersage_heute = "";
-			
-			IPS_LogMessage("SymconYahooWeather", "WeatherCondition: ". $this->getWeatherCondition($forecast[0]->code));
-			
 			$vorhersage_heute = $this->getWeatherCondition($forecast[0]->code);
 				
 			$this->SetValueString("YWH_Wetter_heute", $vorhersage_heute );
