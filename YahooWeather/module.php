@@ -147,7 +147,7 @@ class SymconYahooWeather extends IPSModule
 
 				if( $HTMLBoxType == 1 ){
 					$weatherstring .= '<br>';
-					$weatherstring = $this->getWeatherCondition($forecast[$i]->code);
+					$weatherstring .= $this->getWeatherCondition($forecast[$i]->code);
 				}
 			}
 			$weatherstring .= '</td>';
