@@ -15,7 +15,7 @@ class SymconYahooWeather extends IPSModule
         $this->RegisterPropertyInteger("YWHIntervall", 14400);
 		$this->RegisterPropertyString("YWHTemperature","c");
 		$this->RegisterPropertyInteger("YWHImageZoom", 100);
-		$this->RegisterPropertyInteger("YWHDisplay", 1;
+		$this->RegisterPropertyInteger("YWHDisplay", 1);
 		
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
