@@ -37,8 +37,6 @@ class SymconYahooWeather extends IPSModule
 		
         $this->RegisterTimer("UpdateSymconYahooWeather", 14400, 'YWH_Update($_IPS[\'TARGET\']);');
 		
-		// Inspired by module SymconTest/HookServe
-		$this->RegisterHook("/hook/SymconYahooWeather");
     }
     public function Destroy()
     {
@@ -51,7 +49,10 @@ class SymconYahooWeather extends IPSModule
         parent::ApplyChanges();
         
         $this->Update();
-        $this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("YWHIntervall"));
+        // Inspired by module SymconTest/HookServe
+		$this->RegisterHook("/hook/SymconYahooWeather");
+		
+		$this->SetTimerInterval("UpdateSymconYahooWeather", $this->ReadPropertyInteger("YWHIntervall"));
     }
     public function Update()
     {
