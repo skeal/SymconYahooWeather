@@ -126,20 +126,22 @@ class SymconYahooWeather extends IPSModule
 			// build table
 			$weatherstring = '<table width="100%">';
 			// build header
-			$weatherstring .= '<tr>';
 			
-			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				$weatherstring .= '<td align="center">'; 
-				$day = date("w")+$i;
-				$weatherstring .= $weekdays[$day];
-				$weatherstring .= '</td>';
-			}
-			$weatherstring .= '</tr>';
-			
-			// row with weather infos	
+			if( $HTMLBoxType == 1 OR $HTMLBoxType == 2 ){
+				$weatherstring .= '<tr>';
+				
+				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
+					$weatherstring .= '<td align="center">'; 
+					$day = date("w")+$i;
+					$weatherstring .= $weekdays[$day];
+					$weatherstring .= '</td>';
+				}
+				$weatherstring .= '</tr>';
+				
+				// row with weather infos	
 
-			$weatherstring .= '<tr>';
-			
+				$weatherstring .= '<tr>';
+			}
 			
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				/*
