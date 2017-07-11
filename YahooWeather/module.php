@@ -123,20 +123,19 @@ class SymconYahooWeather extends IPSModule
 			$weatherstring = '<table width="100%">';
 			// build header with weekdays
 
-			$weatherstring .= '<tr>';
-			
-			//IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $this->ReadPropertyInteger("YWHDisplay"));
-			//IPS_LogMessage("SymconYahooWeather", "YWHDisplay: ". $HTMLBoxType);
-			
+
+
 			if( $HTMLBoxType == 1 ){	
+				$weatherstring .= '<tr>';
 				for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 					$weatherstring .= '<td align="center">'; 
 					$day = date("w")+$i;
 					$weatherstring .= $weekdays[$day];
 					$weatherstring .= '</td>';
 				}
+				$weatherstring .= '</tr>';
 			}
-			$weatherstring .= '</tr>';
+			
 				
 			// row with weather infos (image + description)	
 			$weatherstring .= '<tr>';
