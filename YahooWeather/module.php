@@ -135,7 +135,7 @@ class SymconYahooWeather extends IPSModule
 			$vorhersage_heute = "";
 			$vorhersage_heute = $this->getWeatherCondition($forecast[0]->code);
 				
-			$this->SetValueString("YWH_Wetter_heute", $vorhersage_heute );
+			$this->SetValueString("YWH_Wetter_heute", html_entity_decode($vorhersage_heute,,ISO-8859-15) );
 			$this->SetValueFloat("YWH_Heute_temp_min", $forecast[0]->low );
 			$this->SetValueFloat("YWH_Heute_temp_max", $forecast[0]->high );
 			
