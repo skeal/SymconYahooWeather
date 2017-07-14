@@ -165,7 +165,7 @@ class SymconYahooWeather extends IPSModule
 			
 
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
-				$weatherstring .= '<td align="center">';
+				$weatherstring .= '<td align="center"><br>';
 				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
 
 				if( $HTMLBoxType == 1 ){
@@ -324,7 +324,7 @@ class SymconYahooWeather extends IPSModule
 				"44" => "Teilweise bew&ouml;lkt", 
 				"45" => "Donnerregen", 
 				"46" => "Schneeschauer", 
-				"47" => "Einzelne Gewitterschauer (tags&uuml;ber)",
+				"47" => "Einzelne Gewitterschauer",
 				);
 			return $weathercondition[$condition];
 		}
