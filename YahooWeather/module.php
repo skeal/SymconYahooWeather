@@ -324,7 +324,7 @@ class SymconYahooWeather extends IPSModule
 				"44" => "Teilweise bew&ouml;lkt", 
 				"45" => "Donnerregen", 
 				"46" => "Schneeschauer", 
-				"47" => "Einzelne Gewitterschauer",
+				"47" => "Einzelne Gewitterschauer (tags&uuml;ber)",
 				);
 			return $weathercondition[$condition];
 		}
