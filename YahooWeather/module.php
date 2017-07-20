@@ -62,7 +62,7 @@ class SymconYahooWeather extends IPSModule
 		
 		// build nice layout
 		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON, "") );
-		$this->SetValueString("IPSWetter", $this->GenerateWeatherTable($weatherDataJSON), "<br>" );
+		$this->SetValueString("IPSWetter", $this->GenerateWeatherTable($weatherDataJSON, "<br>") );
     }
 
     private function SetValueInt($Ident, $Value){
