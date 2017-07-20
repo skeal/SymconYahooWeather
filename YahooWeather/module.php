@@ -19,6 +19,7 @@ class SymconYahooWeather extends IPSModule
 		
 		
 		$this->RegisterVariableString("Wetter", "Wetter","~HTMLBox",1);
+		$this->RegisterVariableString("YWH_IPS_Wetter", "Wetterdarstellung IPSView","~HTMLBox",1);
 		
 		// Vorhersage für heute als Variablen
 		$this->RegisterVariableString("YWH_Wetter_heute", "Wettervorhersage (heute)");
@@ -60,7 +61,8 @@ class SymconYahooWeather extends IPSModule
 		$weatherDataJSON = $this->QueryWeatherData();
 		
 		// build nice layout
-		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON) );
+		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON, "") );
+		$this->SetValueString("IPSWetter", $this->GenerateWeatherTable($weatherDataJSON), "<br>" );
     }
 
     private function SetValueInt($Ident, $Value){
@@ -101,7 +103,7 @@ class SymconYahooWeather extends IPSModule
 		 }
 	}
 	
-	private function GenerateWeatherTable($Value){
+	private function GenerateWeatherTable($Value, $filler){
     	$weekdays = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"); 
 		$forecast = $Value->{'query'}->{'results'}->{'channel'}->{'item'}->{'forecast'};
 		
@@ -166,6 +168,7 @@ class SymconYahooWeather extends IPSModule
 
 			for( $i = 0; $i < $this->ReadPropertyInteger("YWHDays"); $i++ ){
 				$weatherstring .= '<td align="center">';
+				$weatherstring .= $filler;
 				$weatherstring .= '<img src="/hook/SymconYahooWeather/' .$forecast[$i]->code .'.png" style="height:' .$this->ReadPropertyInteger("YWHImageZoom") .'%;width:auto;">';
 
 				if( $HTMLBoxType == 1 ){
@@ -304,8 +307,8 @@ class SymconYahooWeather extends IPSModule
 				"24" => "Windig", 
 				"25" => "Kalt", 
 				"26" => "Bew&ouml;lkt", 
-				"27" => "Gr&ouml;&szlig;tenteils bew&ouml;lkt<br>(nachts)", 
-				"28" => "Gr&ouml;&szlig;tenteils bew&ouml;lkt<br>(tags&uuml;ber)", 
+				"27" => "Gr&ouml;&szlig;tenteils bew&ouml;lkt (nachts)", 
+				"28" => "Gr&ouml;&szlig;tenteils bew&ouml;lkt (tags&uuml;ber)", 
 				"29" => "Teilweise bew&ouml;lkt (nachts)", 
 				"30" => "Teilweise bew&ouml;lkt (tags&uuml;ber)", 
 				"31" => "Klar (nachts)", 
