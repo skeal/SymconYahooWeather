@@ -30,7 +30,7 @@ class SymconYahooWeather extends IPSModule
 		$this->RegisterVariableString("YWH_Sonnenuntergang", "Sonnenuntergang (heute)");
 		
 		$this->RegisterVariableString("YWH_Luftfeuchtigkeit", "Luftfeuchtigkeit (heute)");
-		$this->RegisterVariableString("YWH_Luftdruck", "Luftdruck (heute)");
+		//$this->RegisterVariableString("YWH_Luftdruck", "Luftdruck (heute)");
 		$this->RegisterVariableString("YWH_Sichtweite", "Sichtweite (heute)");
 		$this->RegisterVariableString("YWH_WindGeschwindigkeit", "Windgeschwindigkeit (heute)");
 		
@@ -120,11 +120,11 @@ class SymconYahooWeather extends IPSModule
 		$this->setValueString("YWH_Sonnenuntergang", date("H:i",strtotime($sonnenUntergang)) ." Uhr");
 		
 		$this->setValueString("YWH_Luftfeuchtigkeit", $luftFeuchtigkeit );
-		$this->setValueString("YWH_Luftdruck", $luftDruck );
+		//$this->setValueString("YWH_Luftdruck", $luftDruck );
 		$this->setValueString("YWH_Sichtweite", $sichtweite );
 		$this->setValueString("YWH_WindGeschwindigkeit", $windGeschwindigkeit );
 		
-		$this->setValueString("YWH_WetterImage", "/hook/SymconYahooWeather/" .$forecast[0]->code .".png" );
+		$this->setValueString("YWH_WetterImage", $forecast[0]->code );
 		
 		
 		$temperature = strtoupper($this->ReadPropertyString("YWHTemperature"));

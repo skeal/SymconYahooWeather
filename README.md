@@ -63,7 +63,7 @@ Temp (max) | String | Anzeige Maximaltemperatur für den aktuellen Tag
 Temp (min) | String | Anzeige Minimaltemperatur für den aktuellen Tag
 Wettervorhersage (heute) | String | Wettervorhersage in Textform für den aktuellen Tag
 Windgeschwindigkeit (heute) | String | Anzeige Windgeschwindigkeit in km/h für den aktuellen Tag
-WetterImage (heute) | String | BildUrl für den aktuellen Tag
+WetterImage (heute) | String | BildCode für den aktuellen Tag 
 
 
 
@@ -78,3 +78,5 @@ v1.0 first release
 v1.1 update image zoom
 
 v1.2 update Variables and Single-Image-Mode
+
+v1.3 removed pressure / 
