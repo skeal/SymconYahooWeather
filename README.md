@@ -78,4 +78,4 @@ v1.1 update image zoom
 
 v1.2 update Variables and Single-Image-Mode
 
-v1.3 removed pressure / 
+v1.3 Luftdruck entfernt, WetterImage zeigt nun den OriginalCode von Yahoo 
