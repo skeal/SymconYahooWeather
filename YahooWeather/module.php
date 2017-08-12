@@ -59,7 +59,11 @@ class SymconYahooWeather extends IPSModule
     {
 		// get Data from Yahoo Weather
 		$weatherDataJSON = $this->QueryWeatherData();
-		
+		if ($weatherDataJSON == NULL)
+		{
+			echo 'Error on read Yahoo Data';
+			return;
+		}
 		// build nice layout
 		$this->SetValueString("Wetter", $this->GenerateWeatherTable($weatherDataJSON, "") );
 		$this->SetValueString("YWH_IPS_Wetter", $this->GenerateWeatherTable($weatherDataJSON, "<br>") );
