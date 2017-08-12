@@ -201,7 +201,7 @@ class SymconYahooWeather extends IPSModule
 			// finish table
 			$weatherstring .= '</table>';
 			
-			IPS_LogMessage("SymconYahooWeather", "weatherstring: ". $weatherstring);
+			//IPS_LogMessage("SymconYahooWeather", "weatherstring: ". $weatherstring);
 			return $weatherstring;
 		} 
 		else return "Weather is not available";
